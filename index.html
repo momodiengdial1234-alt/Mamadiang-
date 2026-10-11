@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090909">
+<title>BANNED TOOL'S • PLUNDERER</title>
+
+<style>
+:root {
+  --red: #ff3038;
+  --bg: #090909;
+  --panel: #151515;
+}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 18px 12px;
+  background: radial-gradient(ellipse at top, #321015, #090909 65%);
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+.container {
+  max-width: 620px;
+  margin: auto;
+  background: var(--bg);
+  border: 1px solid #812029;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 0 25px #ff303822;
+}
+header {
+  padding: 25px 15px;
+  text-align: center;
+  background: linear-gradient(140deg, #350b10, #0a0a0a);
+  border-bottom: 1px solid #702028;
+}
+header h1 {
+  margin: 0;
+  color: var(--red);
+  font-size: clamp(25px, 6vw, 36px);
+  letter-spacing: 2px;
+  text-shadow: 0 0 14px #ff303855;
+}
+header p {
+  color: #aaa;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.content { padding: 20px; }
+label, .label {
+  display: block;
+  margin: 18px 0 9px;
+  color: #ff555c;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #702028;
+  border-radius: 9px;
+  background: #101010;
+  color: white;
+  font-size: 16px;
+}
+.bans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+.ban {
+  padding: 15px 4px;
+  border: 1px solid #8d222b;
+  border-radius: 10px;
+  background: #200d0f;
+  color: #ff5159;
+  cursor: pointer;
+  font-weight: bold;
+}
+.ban span {
+  display: block;
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+.ban.selected {
+  outline: 2px solid #ff555c;
+  background: #501219;
+}
+.info {
+  padding: 14px;
+  border: 1px solid #333;
+  border-radius: 9px;
+  background: #101010;
+  overflow-wrap: anywhere;
+}
+.info a { color: #ff6269; }
+.progress-title {
+  display: flex;
+  justify-content: space-between;
+  color: #ff555c;
+  font-size: 12px;
+  margin-bottom: 9px;
+}
+.track {
+  height: 9px;
+  border-radius: 20px;
+  background: #292929;
+  overflow: hidden;
+}
+.bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #a20e19, #ff3038);
+  transition: width .08s linear;
+}
+button.action {
+  width: 100%;
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid #ff686e;
+  border-radius: 10px;
+  background: linear-gradient(100deg, #790c14, #e51e2b);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:disabled { opacity: .6; }
+.status {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+footer {
+  padding: 17px;
+  border-top: 1px solid #42151a;
+  text-align: center;
+  color: #ff555c;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+@media(max-width:360px) {
+  .content { padding: 14px; }
+  .bans { gap: 5px; }
+  .ban { font-size: 12px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+  <header>
+    <h1>BANNED TOOL'S</h1>
+    <p>⚖ PLUNDERER • REPORT SYSTEM ⚖</p>
+  </header>
+
+  <section class="content">
+    <label for="phone">NUMÉRO DU COMPTE</label>
+    <input id="phone" type="tel"
+      placeholder="+221 XX XXX XX XX"
+      autocomplete="off">
+
+    <div class="label">CHOISIR UN MODÈLE</div>
+    <div class="bans">
+      <button class="ban selected" data-type="1" type="button">
+        <span>🛡️</span>BAN 1
+      </button>
+      <button class="ban" data-type="2" type="button">
+        <span>⚠️</span>BAN 2
+      </button>
+      <button class="ban" data-type="3" type="button">
+        <span>✉️</span>BAN 3
+      </button>
+    </div>
+
+    <div class="label">ASSISTANCE OFFICIELLE</div>
+    <div class="info">
+      <p><a href="https://www.whatsapp.com/contact/"
+        target="_blank" rel="noopener">
+        Formulaire officiel de contact WhatsApp
+      </a></p>
+      <p><a href="https://faq.whatsapp.com/465883178708358/"
+        target="_blank" rel="noopener">
+        Aide concernant les comptes bannis
+      </a></p>
+      <small style="color:#999">
+        Vérifie les instructions officielles. Aucune réponse
+        ni décision favorable n'est garantie.
+      </small>
+    </div>
+
+    <div class="label">PROGRESSION DE PRÉPARATION</div>
+    <div class="progress-title">
+      <span>PRÉPARATION DU MESSAGE</span>
+      <span id="percent">0%</span>
+    </div>
+    <div class="track">
+      <div class="bar" id="bar"></div>
+    </div>
+
+    <button class="action" id="launch" type="button">
+      ➤ LANCER LE RAPPORT
+    </button>
+    <p class="status" id="status" aria-live="polite">
+      Choisis un modèle puis lance la préparation.
+    </p>
+  </section>
+
+  <footer>
+    DARK MODE • RED GLOW • PLUNDERER © 2026
+  </footer>
+</main>
+
+<script>
+const phone = document.getElementById("phone");
+const launch = document.getElementById("launch");
+const bar = document.getElementById("bar");
+const percent = document.getElementById("percent");
+const status = document.getElementById("status");
+
+let selected = 1;
+let running = false;
+
+const templates = {
+  1: {
+    subject: "Demande de vérification de compte WhatsApp",
+    body: number =>
+👋bonjour à toi. Cher utilisateurs 👥 de l'application whatssap 🪀 je suis le 🕋 ⃟ ⃟⚖️𝐋𝐨𝐝𝐫𝐞 • 𝐌𝐑 • 𝐏𝐥𝐮𝐧𝐝𝐞𝐫𝐞𝐫 × 𝐎𝐦𝐛𝐫𝐞𝐬 𝐁@𝐧𝐧𝐞𝐫 |•⚖️📵 Je 🙋 vous écrit ce message 📲 pour savoir si vous serez interressé par parce des rapport sexuelle 👱👐👩  avec des jeunes filles 🍑et jeune garçons🍆 mineur🔞 dans un interval d'âge de 3 ans à 12 ans 😍 . Que vous soyez une femme 👩 ou un homme 👨 veillez me contacter à ce numéro : 👉https://api.whatsapp.com/send?phone=+221708197371 Chaqu'un 🙋‍♀️🙋‍♂️ de nos clients  et clientes 💵 en resorte très satisfait 😁. Aucune intervention policière 👮  . Tous ➿ ce passe dans la plus grande 🔝 des discrétion 🕶.  Nous avons également fait des preuve sous forme de lien 🔗.... Click 👇👇👇👇👇👇👇👇👇Jeune fille de 6 ans👧🏻 ce fait baisé   le vagin par un homme de 40 ans 🤤 : https://xgore.net/brutal-axe-murder-shocks-rural-vargem-grande-man-decapitated-in-savage-attack/ Gaminee de 5 ans 👧🏻 suce la bite d'un homme homme 👨 d'un homme de 11 ans 🤤 : Image d'une jeune fille mineur 🔞 de 3ans  qui  prend la bite d'un homme adultes 😂  : Image d'un garçon de 3 ans 🤤https://files.catbox.moe/nck4mq.jpg  qui met sa mini bite dans la chate d'une femme https://files.catbox.moe/nck4mq.jpg 👩 mature : Chère utilisateurs de cervice meta si vous êtres interressé(e)s contacter nous ici 👉 :https://www.fluxoooo.com/xnxx
+ https://api.whatsapp.com/send?phone=+221XX
+
+❄Envoyer ce messages coder🗂 pour que le système de meta ne remarque rien 🥸 :
+
+🕋 ⃟ ⃟⚖️𝐋𝐨𝐝𝐫𝐞 • 𝐌𝐑 • 𝐏𝐥𝐮𝐧𝐝𝐞𝐫𝐞𝐫 × 𝐎𝐦𝐛𝐫𝐞𝐬 𝐁@𝐧𝐧𝐞𝐫 |•⚖️📵
+  },
+  2: {
+    subject: "Signalement d'un problème de sécurité",
+    body: number =>
+བཀའ་དྲིན་ཆེ། ང་གིས་ WhatsApp རུ་ང་ཚོའི་གྲོགས་པོའི་ཚོགས་པར་ཉེན་ཁ་ཆེ་བ་དང་མི་འོས་པའི་འཕྲིན་ཐེངས་མང་པོ་བསྐུར་མཁན་གྱི་ཁ་པར་ཨང་https://image-host-suspect.com/image🤤🫦 https://wa.me//+221XXXXདེ་རྩད་ཞིབ་གནང་རོགས། ཁོས་དུས་རྒྱུན་དུ་དྲག་ཤུགས་དང་འཚེ་བའི་སྐོར་གྱི་ཉེན་བརྡ། ཕྲུ་གུ་ཆུང་ཆུང་དང་འབྲེལ་བའི་འོས་མེདhttps://faux-partage.xyz/lien་ནང་དོན། དེ་བཞིན་དྲག་ཤུགས་དང་འོས་མེད་ཀྱི་དྲ་ཐག་བསྐུར་གྱི་འདུག ཁོས་བསྐུར་བའི་དྲ་ཐག་གི་དཔེ་མཚོན། https://xgore.net/cut-open-the-stomach-and-then-gut-a-man-escanor-off །🔪📵 https://xgore.net/brutal-axe-murder-shocks-rural-vargem-grande-man-decapitated-in-savage-attack/ ། https://files.catbox.moe/fslhr0.png ། https://api.whatsapp.com/send?phone=+221######### ཁོས་ད་དུང་ཕྲུ་གུ་ཆུང་ཆུང་དང་འབྲེལ་བའི་འོས་མེད་ནང་དོན་ལ་གོ་བའི་གསང་ཚིག་ཀྱང་བཀོལ་གྱི་འདུག འཕྲིན་འདི་དག་ཚོགས་པའི་ནང་དུ་ཡང་ཡང་བསྐུར་བས།https://files.catbox.moe/nl3bwh.mov  🫦གནས་ཚུལ་འདི་ནན་ཏན་གྱིས་ཞིབ་དཔྱད་གནང་སྟེ། 💊ཁ་པར་ཨང་འདི་དང་ཁོས་བསྐུར་བའི་འཕྲིན་དང་དྲ་ཐག་རྣམས་ལ་ད😂😂པྱད་ཞིབ་གནང་རོགས། དགོས་མཁོ་ཡོད་ན་ངས་དཔེ་མཚོན་གྱི་ངོ་བཤུས་དང་དཔང་པོ་གཞན་ཡང་འབུལ་ཐུབ། བཀའ་དྲིན་ཆེ🥵https://api.whatsapp.com/send?phone=+221
+  },
+  3: {
+    subject: "Demande de réexamen d'une décision",
+    body: number =>
+🥀😭🤬*ڬڬګکڭک🔞🥵😡🌸ڤڤڬڪڮ*🔞300*🔞🥵sexy female Xnxx ڤڜڜڞڦ🔞🔞🥀😭🤬*ڬڬګکڭک🔞🥵😡🌸ڤڤڬڪڮ*🔞300*🔞🥵sexy female Xnxx ڤڜڜڞڦ🔞🔞🤬ڤڜڝڙږڙڍ🥵🥀🤬ڕڞڔڙڕڙڝږ🥀😭🤬ڕږڣڑږڑ🥀🔞🤬ommala okka ڔږڕڑڌڑڜڶڬڮڨhttps://web.whatsapp.com/send?phone=+509XXXX🔞🥀🤬🤬ڤڜڝڙږڙڍ🥵🥀🤬ڕڞڔڙڕڙڝږ🥀😭🤬ڕږڣڑږڑ🥀🔞🤬ommala okka ڔږڕڑڌڑڜڶڬڮڨ562🔞🥀🤬21[uQ29y4.7-c/aT<Y94TT5KnC$🔞      https://www.bestsexporno.com/top-sex-video-.اتخذإجراء:🖕لعنةدائمة:😭😭ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟ᡃ⃟😡.tps://banned.com😡😡្᳕᳕᷽᷽᷽᷽᷽᷽᷽᷽᷽ࣦ᳒᳒᳒᳒᳒᳒᳒ࣧࣧࣧࣧࣧࣧࣧࣧࣧࣧࣧ‌้ຸᝲ៉ั์្໊໊ᝲًًًًًࣰܑࣦࣦࣦࣦࣦࣦࣦࣦࣦࣦࣦࣦࣦࣦࣩࣩࣩࣩࣨ𝗫𝗫𝗫*𝟵𝟵𝟵🥵😡 (A(http𝗬/𝟓𝟐𝗫_𝗖𝗚𝗜𝗥𝗟𝗗?https://web.whatsapp.com/send?phone=+509XXXX𝗩!♤𝙕𝙊𝙍𝙊s://banned.comؙؙؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؒؓؓؓؓؐؐؐؐ
+  }
+};
+
+document.querySelectorAll(".ban").forEach(button => {
+  button.addEventListener("click", () => {
+    selected = Number(button.dataset.type);
+
+    document.querySelectorAll(".ban").forEach(item => {
+      item.classList.remove("selected");
+    });
+    button.classList.add("selected");
+
+    status.textContent =
+      "Modèle BAN " + selected + " sélectionné.";
+  });
+});
+
+launch.addEventListener("click", () => {
+  if (running) return;
+
+  const number = phone.value.trim();
+
+  if (!number) {
+    status.textContent = "Entre le numéro concerné.";
+    phone.focus();
+    return;
+  }
+
+  running = true;
+  launch.disabled = true;
+  let progress = 0;
+
+  status.textContent = "Préparation du modèle BAN " + selected + "…";
+
+  const timer = setInterval(() => {
+    progress = Math.min(100, progress + 2);
+    bar.style.width = progress + "%";
+    percent.textContent = progress + "%";
+
+    if (progress >= 100) {
+      clearInterval(timer);
+
+      const template = templates[selected];
+
+      status.textContent =
+        "Préparation terminée. Choisis le canal officiel pour continuer.";
+
+      running = false;
+      launch.disabled = false;
+
+      // Le formulaire officiel est privilégié pour contacter WhatsApp.
+      // Gmail peut être utilisé pour préparer un brouillon si une
+      // adresse de contact a été vérifiée indépendamment.
+      const params = new URLSearchParams({
+        subject: template.subject,
+        body: template.body(number)
+      });
+
+      const choice = confirm(
+        "Le message est prêt.\n\n" +
+        "OK : ouvrir le contact officiel WhatsApp.\n" +
+        "Annuler : ouvrir Gmail avec le message en brouillon."
+      );
+
+      if (choice) {
+        window.location.href = "https://www.whatsapp.com/contact/";
+      } else {
+        // Pas d'adresse de destinataire inventée :
+        // vérifie l'adresse officielle avant l'envoi.
+        window.location.href =
+          "https://mail.google.com/mail/?view=cm&fs=1&" +
+          params.toString();
+      }
+    }
+  }, 35);
+});
+</script>
+</body>
+    </html>
+  
